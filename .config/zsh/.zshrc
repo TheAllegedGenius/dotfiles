@@ -1,10 +1,11 @@
 if [[ $EUID == 0 ]]; then
   PROMPT="%B%F{141}%n%f%b %F{159}%~%f%F{40} # %f"
 else
-  PROMPT="%B%F{141}%n%f%b %F{159}%~%f%F{40} ❯ %f"
+#  PROMPT="%B%F{141}%n%f%b %F{159}%~%f%F{40} ❯ %f"
+   PROMPT="%B%F{135}%n%f%b: %F{159}%~%f %F{40}>%f "
 fi
 
-alias ls='ls --color'
+alias ls='ls --color=auto'
 
 # Change to directory without 'cd' and no error if there is no match
 setopt autocd nomatch
@@ -34,3 +35,4 @@ alias python=/opt/homebrew/bin/python3
 
 # Default editor
 export EDITOR=vim
+export SUDO_EDITOR=rvim

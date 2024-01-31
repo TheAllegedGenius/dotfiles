@@ -11,6 +11,9 @@ set noerrorbells
 " Uses a bell symbol instead of beep
 set visualbell
 
+" Allows for switching buffers without saving current buffer
+set hidden
+
 " Enable filetype-specific plugins and indenting
 filetype plugin indent on
 
