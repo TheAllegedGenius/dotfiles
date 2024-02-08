@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+kernel="$(uname)"
+if [ $kernel == "Darwin" ]; then
+    os="macOS"
+elif [ $kernel == "Linux" ]; then
+    os="Linux"
+else
+    echo "Kernel unknown!"
+fi
+
+echo "Making symbolic link: ~/.dotfiles/.config to ~/.config..."
+init_config() {
+if [ -d ~/.config ]; then
+    TEMP=$(mktemp -d)
+    cp -r ~/.config/* $TEMP
+    setup_$os
+    cp -rn $TEMP/* ~/.config
+    rm -rf $TEMP
+else
+    mkdir -p ~/.config
+    setup_$os
+fi
+}
+echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
+echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
+ln -s ~/.dotfiles/.zprofile ~/.zprofile
+echo "All symlinks complete."
+
+
+setup_Linux() {
+    
+}
+
+setup_macOS() {
+}
