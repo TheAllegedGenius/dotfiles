@@ -10,12 +10,37 @@ function add_file() {
 
 # Function to add plugins if they exist
 function add_plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
-        add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
-        add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    local plugin_name=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$plugin_name" ]; then
+        add_file "plugins/$plugin_name/$plugin_name.plugin.zsh"
+        add_file "plugins/$plugin_name/$plugin_name.zsh"
     else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME" || { echo "Error: Failed to clone repository $1"; return 1; }
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$plugin_name" || { echo "Error: Failed to clone repository $1"; return 1; }
         add_plugin $1
+    fi
+}
+
+# Function to update plugins
+function update_plugins() {
+    local updated_plugins=""
+    for plugin in "$ZDOTDIR/plugins"/*; do
+        local plugin_name=$(basename "$plugin")
+        if [ -d "$plugin/.git" ]; then
+            cd $plugin || { echo "$plugin_name skipped"; continue; }
+            local update_result=$(git pull 2>&1)
+            if [[ "$update_result" == "Already up to date." ]]; then
+                echo "$plugin_name: $update_result"
+            else
+                updated_plugins+="$plugin_name "
+                echo "$plugin_name: $(echo "$update_result" | grep "Updating ")"
+            fi
+        else
+            echo "Skipping non-Git repository: $plugin_name" >&2
+        fi
+    done
+    if [[ $updated_plugins == "" ]]; then
+        echo -e "\033[31mNo plugins were updated\033[0m"
+    else
+        echo -e "\033[32mUpdated: $updated_plugins\033[0m"
     fi
 }
