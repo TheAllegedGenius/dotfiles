@@ -9,11 +9,11 @@ else
     echo "Kernel unknown!"
 fi
 
-echo "Making symbolic link: ~/.dotfiles/.config to ~/.config..."
 init_config() {
 if [ -d ~/.config ]; then
     TEMP=$(mktemp -d)
     cp -r ~/.config/* $TEMP
+    rm -rf ~/.config/*
     setup_$os
     cp -rn $TEMP/* ~/.config
     rm -rf $TEMP
@@ -22,16 +22,37 @@ else
     setup_$os
 fi
 }
-echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
-ln -s ~/.dotfiles/.zprofile ~/.zprofile
-echo "All symlinks complete."
-
 
 setup_Linux() {
-    
+    echo "Running Linux setup..."
+    echo "Making symbolic link: ~/.dotfiles/zsh to ~/.config..."
+    ln -s ~/.dotfiles/zsh ~/.config
+    echo "Making symbolic link: ~/.dotfiles/tmux to ~/.config..."
+    ln -s ~/.dotfiles/tmux ~/.config
+    echo "Making symbolic link: ~/.dotfiles/sway to ~/.config..."
+    ln -s ~/.dotfiles/sway ~/.config
+    echo "Making symbolic link: ~/.dotfiles/foot to ~/.config..."
+    ln -s ~/.dotfiles/foot ~/.config
+    echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
+    ln -s ~/.dotfiles/.vimrc ~/.vimrc
+    echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
+    ln -s ~/.dotfiles/.zprofile ~/.zprofile
+    mkdir ~/.config/zsh/plugins
+    echo "All symbolic links created. Restart your shell."
 }
 
 setup_macOS() {
+    echo "Running macOS setup..."
+    echo "Making symbolic link: ~/.dotfiles/zsh to ~/.config..."
+    ln -s ~/.dotfiles/zsh ~/.config
+    echo "Making symbolic link: ~/.dotfiles/tmux to ~/.config..."
+    ln -s ~/.dotfiles/tmux ~/.config
+    echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
+    ln -s ~/.dotfiles/.vimrc ~/.vimrc
+    echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
+    ln -s ~/.dotfiles/.zprofile ~/.zprofile
+    mkdir ~/.config/zsh/plugins
+    echo "All symbolic links created. Restart your shell."
 }
+
+init_config
