@@ -49,7 +49,6 @@ au BufNewFile,BufRead *.py
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-    Plug 'JuliaEditorSupport/julia-vim'
     Plug 'lervag/vimtex'
         let g:tex_flavor='latex'
         let g:vimtex_view_enabled=1

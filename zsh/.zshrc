@@ -21,8 +21,8 @@ source "$ZDOTDIR/zsh-functions"
 bindkey -M vicmd 'h' backward-char
 
 # Plugins
-zsh_add_plugin "zsh-syntax-highlighting"
-zsh_add_plugin "zsh-autosuggestions"
+add_plugin "zsh-users/zsh-syntax-highlighting"
+add_plugin "zsh-users/zsh-autosuggestions"
 
 # Vim keybinding
 bindkey -v
@@ -32,7 +32,3 @@ alias zshrc="vim ~/.config/zsh/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias cdcs="cd ~/Documents/CS"
 alias python=/opt/homebrew/bin/python3
-
-# Default editor
-export EDITOR=vim
-export SUDO_EDITOR=rvim
