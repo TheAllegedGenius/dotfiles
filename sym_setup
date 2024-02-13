@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 kernel="$(uname)"
 if [ $kernel == "Darwin" ]; then
     os="macOS"
@@ -7,6 +7,7 @@ elif [ $kernel == "Linux" ]; then
     os="Linux"
 else
     echo "Kernel unknown!"
+    exit 1
 fi
 
 init_config() {
@@ -44,15 +45,30 @@ setup_Linux() {
 setup_macOS() {
     echo "Running macOS setup..."
     echo "Making symbolic link: ~/.dotfiles/zsh to ~/.config..."
-    ln -s ~/.dotfiles/zsh ~/.config
+    create_symlink $HOME/.dotfiles/zsh ~/.config/zsh
     echo "Making symbolic link: ~/.dotfiles/tmux to ~/.config..."
-    ln -s ~/.dotfiles/tmux ~/.config
+    create_symlink ~/.dotfiles/tmux ~/.config/tmux
     echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
-    ln -s ~/.dotfiles/.vimrc ~/.vimrc
+    create_symlink ~/.dotfiles/.vimrc ~/.vimrc
     echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
-    ln -s ~/.dotfiles/.zprofile ~/.zprofile
-    mkdir ~/.config/zsh/plugins
+    create_symlink ~/.dotfiles/.zprofile ~/.zprofile
+    [ -d ~/.config/zsh/plugins ] || mkdir ~/.config/zsh/plugins
     echo "All symbolic links created. Restart your shell."
+}
+
+create_symlink() {
+    source_path=$1
+    target_path=$2
+
+    if [ -L $target_path ] && [ "$(readlink -f $target_path)" = "$(eval echo "$source_path")" ]; then
+    	echo "Symbolic link already exists: $target_path"
+    else
+	if [ -e $target_path ]; then
+            rm -rf $target_path || { echo "Failed to remove existing file: $target_path"; return 1; }
+	fi
+    	ln -s $source_path $target_path || { echo "Failed to create symbolic link: $source_path --> $target_path"; return 1; }
+        echo "Created symbolic link: $source_path --> $target_path"
+    fi
 }
 
 init_config
