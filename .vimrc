@@ -31,6 +31,9 @@ set incsearch
 " Highlight things that are found in the search
 "let hlsearch
 
+" Show Unicode instead of ASCII
+set encoding=utf-8
+
 " Custom bindings
 " Execute current Python file
 autocmd FileType python map <buffer> py :w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>

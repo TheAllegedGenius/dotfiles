@@ -10,4 +10,6 @@ export ZDOTDIR=$HOME/.config/zsh
 export EDITOR=vim
 export SUDO_EDITOR=rvim
 
+export LANG=en_US.utf-8
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
