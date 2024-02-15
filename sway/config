@@ -226,6 +226,7 @@ bar {
  
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
+    font "Hack Regular 12"
     status_command while ~/.config/sway/status.sh; do sleep 1; done
 
     colors {
@@ -233,7 +234,6 @@ bar {
         background #323232
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
-    font pango: Hack Regular 12
 }
 
 include /etc/sway/config.d/*
