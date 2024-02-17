@@ -27,18 +27,28 @@ fi
 setup_Linux() {
     echo "Running Linux setup..."
     echo "Making symbolic link: ~/.dotfiles/zsh to ~/.config..."
-    ln -s ~/.dotfiles/zsh ~/.config
+    create_symlink $HOME/.dotfiles/zsh ~/.config/zsh
+
     echo "Making symbolic link: ~/.dotfiles/tmux to ~/.config..."
-    ln -s ~/.dotfiles/tmux ~/.config
+    create_symlink ~/.dotfiles/tmux ~/.config/tmux
+
+    echo "Making symbolic link: ~/.dotfiles/nvim to ~/.config..."
+    create_symlink ~/.dotfiles/nvim ~/.config/nvim
+    
     echo "Making symbolic link: ~/.dotfiles/sway to ~/.config..."
-    ln -s ~/.dotfiles/sway ~/.config
+    create_symlink ~/.dotfiles/sway ~/.config/sway
+
     echo "Making symbolic link: ~/.dotfiles/foot to ~/.config..."
-    ln -s ~/.dotfiles/foot ~/.config
+    create_symlink ~/.dotfiles/foot ~/.config/foot
+    
     echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
-    ln -s ~/.dotfiles/.vimrc ~/.vimrc
+    create_symlink ~/.dotfiles/.vimrc ~/.vimrc
+
     echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
-    ln -s ~/.dotfiles/.zprofile ~/.zprofile
-    mkdir ~/.config/zsh/plugins
+    create_symlink ~/.dotfiles/.zprofile ~/.zprofile
+
+    [ -d ~/.config/zsh/plugins ] || mkdir ~/.config/zsh/plugins
+    echo "All symbolic links created. Restart your shell."
     echo "All symbolic links created. Restart your shell."
 }
 
@@ -46,12 +56,19 @@ setup_macOS() {
     echo "Running macOS setup..."
     echo "Making symbolic link: ~/.dotfiles/zsh to ~/.config..."
     create_symlink $HOME/.dotfiles/zsh ~/.config/zsh
+
     echo "Making symbolic link: ~/.dotfiles/tmux to ~/.config..."
     create_symlink ~/.dotfiles/tmux ~/.config/tmux
+
+    echo "Making symbolic link: ~/.dotfiles/nvim to ~/.config..."
+    create_symlink ~/.dotfiles/nvim ~/.config/nvim
+
     echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
     create_symlink ~/.dotfiles/.vimrc ~/.vimrc
+
     echo "Making symbolic link: ~/.dotfiles/.zprofile to ~/.zprofile..."
     create_symlink ~/.dotfiles/.zprofile ~/.zprofile
+
     [ -d ~/.config/zsh/plugins ] || mkdir ~/.config/zsh/plugins
     echo "All symbolic links created. Restart your shell."
 }
