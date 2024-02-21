@@ -12,7 +12,7 @@ export SUDO_EDITOR=rvim
 
 export LANG=en_US.utf-8
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # Source brew coreutils and binaries before macOS default binaries
