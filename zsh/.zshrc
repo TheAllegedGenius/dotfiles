@@ -5,8 +5,6 @@ else
    PROMPT="%B%F{135}%n%f%b: %F{159}%~%f %F{40}>%f "
 fi
 
-alias ls='ls --color=auto'
-
 # Change to directory without 'cd' and no error if there is no match
 setopt autocd nomatch
 
@@ -15,8 +13,6 @@ unsetopt beep
 
 # Useful functions
 source "$ZDOTDIR/zsh-functions"
-
-# Normal files to source
 
 bindkey -M vicmd 'h' backward-char
 
@@ -28,7 +24,11 @@ add_plugin "zsh-users/zsh-autosuggestions"
 bindkey -v
 
 # Aliases
+alias ls='ls --color=auto'
 alias zshrc="vim ~/.config/zsh/.zshrc"
 alias vimrc="vim ~/.vimrc"
-alias cdcs="cd ~/Documents/CS"
-alias python=/opt/homebrew/bin/python3
+
+if [ "$(uname)" == "Darwin" ]; then
+    alias python=/opt/homebrew/bin/python3
+    export icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+fi
