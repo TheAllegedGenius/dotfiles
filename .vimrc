@@ -38,10 +38,22 @@ set encoding=utf-8
 " Execute current Python file
 autocmd FileType python map <buffer> py :w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
 autocmd FileType julia map <buffer> jl :w<CR>:exec '!clear;julia' shellescape(@%, 1)<CR>
+
+let mapleader = " "
 " Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 inoremap <Caps Lock> <Esc>
+
+nnoremap <leader>pv :Ex
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Python file options
 au BufNewFile,BufRead *.py
