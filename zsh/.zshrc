@@ -2,7 +2,7 @@ if [[ $EUID == 0 ]]; then
   PROMPT="%B%F{141}%n%f%b %F{159}%~%f%F{40} # %f"
 else
 #  PROMPT="%B%F{141}%n%f%b %F{159}%~%f%F{40} ❯ %f"
-   PROMPT="%B%F{135}%n%f%b: %F{159}%~%f %F{40}>%f "
+   PROMPT="%B%F{135}%n%f%b@%B%F{75}%m%f%b: %F{159}%~%f %F{40}>%f "
 fi
 
 # Change to directory without 'cd' and no error if there is no match
