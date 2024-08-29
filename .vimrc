@@ -64,6 +64,7 @@ au BufNewFile,BufRead *.py
 " Plugins
 call plug#begin('~/.vim/plugged')
 
+    Plug 'nanotech/jellybeans.vim'
     Plug 'lervag/vimtex'
         let g:tex_flavor='latex'
         let g:vimtex_view_enabled=1
@@ -72,3 +73,6 @@ call plug#begin('~/.vim/plugged')
         let g:vimtex_quickfix_mode=0
 
 call plug#end()
+
+" Colors
+colorscheme jellybeans
