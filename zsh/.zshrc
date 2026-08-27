@@ -16,9 +16,12 @@ source "$ZDOTDIR/zsh-functions"
 bindkey -M vicmd 'h' backward-char
 
 # Plugins
-add_plugin "zsh-users/zsh-syntax-highlighting"
-add_plugin "zsh-users/zsh-autosuggestions"
-update_plugins
+plugins=(
+    "zsh-users/zsh-syntax-highlighting"
+    "zsh-users/zsh-autosuggestions"
+)
+add_plugins $plugins
+#update_plugins
 
 # Vim keybinding
 bindkey -v
