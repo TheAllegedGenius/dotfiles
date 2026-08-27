@@ -19,6 +19,7 @@ bindkey -M vicmd 'h' backward-char
 # Plugins
 add_plugin "zsh-users/zsh-syntax-highlighting"
 add_plugin "zsh-users/zsh-autosuggestions"
+update_plugins
 
 # Vim keybinding
 bindkey -v
