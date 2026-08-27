@@ -10,16 +10,15 @@ function add_file() {
 
 # Function to add plugins if they exist
 function add_plugins() {
-    local plugin repo plugin_name
-    for plugin in $@; do
-        repo="$plugin"
-        plugin_name="${plugin#*/}"
+    local repo plugin_name
+    for repo in $@; do
+        plugin_name="${repo#*/}"
         if [ -d "$ZDOTDIR/plugins/$plugin_name" ]; then
             add_file "plugins/$plugin_name/$plugin_name.plugin.zsh"
             add_file "plugins/$plugin_name/$plugin_name.zsh"
         else
             git clone "https://github.com/$repo.git" "$ZDOTDIR/plugins/$plugin_name" || { echo "Error: Failed to clone repository $plugin"; return 1; }
-            add_plugin "$repo"
+            add_plugins "$repo"
             echo "Success: $repo"
         fi
     done
