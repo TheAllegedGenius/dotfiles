@@ -25,10 +25,7 @@ bindkey -v
 
 # Aliases
 alias ls='ls --color=auto'
-alias zshrc="vim ~/.config/zsh/.zshrc"
-alias vimrc="vim ~/.vimrc"
 
 if [ "$(uname)" = "Darwin" ]; then
     alias python=/opt/homebrew/bin/python3
-    export icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 fi
