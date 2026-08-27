@@ -10,7 +10,8 @@ function add_file() {
 
 # Function to add plugins if they exist
 function add_plugin() {
-    local plugin_name=$(echo $1 | cut -d "/" -f 2)
+    local plugin_name
+    plugin_name="${1#*/}"
     if [ -d "$ZDOTDIR/plugins/$plugin_name" ]; then
         add_file "plugins/$plugin_name/$plugin_name.plugin.zsh"
         add_file "plugins/$plugin_name/$plugin_name.zsh"
@@ -26,13 +27,14 @@ function update_plugins() {
     cur_dir="$PWD"
     local updated_plugins
     updated_plugins=""
+
+    local plugin_name
+    local update_result
     for plugin in "$ZDOTDIR/plugins"/*; do
-        local plugin_name
-        plugin_name=$(basename "$plugin")
+        plugin_name="$(basename "$plugin")"
         if [ -d "$plugin/.git" ]; then
             cd "$plugin" || { echo "$plugin_name skipped"; continue; }
-            local update_result
-            update_result=$(git pull 2>&1)
+            update_result="$(git pull 2>&1)"
             if [[ "$update_result" == "Already up to date." ]]; then
                 echo "$plugin_name: $update_result"
             else
