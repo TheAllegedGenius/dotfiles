@@ -22,12 +22,17 @@ function add_plugin() {
 
 # Function to update plugins
 function update_plugins() {
-    local updated_plugins=""
+    local cur_dir
+    cur_dir="$PWD"
+    local updated_plugins
+    updated_plugins=""
     for plugin in "$ZDOTDIR/plugins"/*; do
-        local plugin_name=$(basename "$plugin")
+        local plugin_name
+        plugin_name=$(basename "$plugin")
         if [ -d "$plugin/.git" ]; then
-            cd $plugin || { echo "$plugin_name skipped"; continue; }
-            local update_result=$(git pull 2>&1)
+            cd "$plugin" || { echo "$plugin_name skipped"; continue; }
+            local update_result
+            update_result=$(git pull 2>&1)
             if [[ "$update_result" == "Already up to date." ]]; then
                 echo "$plugin_name: $update_result"
             else
@@ -43,4 +48,5 @@ function update_plugins() {
     else
         echo -e "\033[32mUpdated: $updated_plugins\033[0m"
     fi
+    cd "$cur_dir" || exit
 }
