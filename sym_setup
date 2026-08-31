@@ -35,12 +35,6 @@ setup_Linux() {
     echo "Making symbolic link: ~/.dotfiles/nvim to ~/.config..."
     create_symlink ~/.dotfiles/nvim ~/.config/nvim
     
-    echo "Making symbolic link: ~/.dotfiles/sway to ~/.config..."
-    create_symlink ~/.dotfiles/sway ~/.config/sway
-
-    echo "Making symbolic link: ~/.dotfiles/foot to ~/.config..."
-    create_symlink ~/.dotfiles/foot ~/.config/foot
-    
     echo "Making symbolic link: ~/.dotfiles/.vimrc to ~/.vimrc..."
     create_symlink ~/.dotfiles/.vimrc ~/.vimrc
 
