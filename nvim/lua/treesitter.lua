@@ -3,7 +3,7 @@ local ensure_installed = { "vimdoc", "bash", "lua", "python", "markdown" }
 require("nvim-treesitter").install(ensure_installed)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = {"*"},
+    pattern = { '<filetype>' },
     callback = function()
         -- syntax highlighting, provided by Neovim
         vim.treesitter.start()
