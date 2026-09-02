@@ -2,9 +2,14 @@ require("mason").setup()
 require("mason-tool-installer").setup({
     ensure_installed = {
         "lua_ls",
-        "jsonls",
-        "jdtls",
-        "texlab"
+        "bashls",
+        "shellcheck", -- Bash linter
+        "yamlls",
+        "systemd-lsp",
+        "systemdlint",
+        "texlab",
+        "pyright",
+        "ruff", -- Python linter
     },
 })
 
