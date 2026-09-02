@@ -8,6 +8,9 @@ vim.opt.termguicolors = true -- Enable 24-bit color
 
 vim.opt.number = true -- Print the line number in front of each line
 vim.opt.numberwidth = 2 -- Number of columns used for the line number
+vim.opt.relativenumber = true -- Use relative line numbers
+vim.opt.cursorline = true -- Highlight current line
+vim.opt.cursorlineopt = "number" -- Only highlight line number
 vim.opt.wrap = false -- Long lines wrap and continue on the next line
 vim.opt.signcolumn = "auto" -- When and how to display the sign column
 vim.opt.colorcolumn = "80" -- Columns to highlight
